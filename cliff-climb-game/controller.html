@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cliffhanger Control Panel</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="controller">
+    <main class="controller-layout">
+      <section class="hud controller-panel" aria-label="Control panel">
+        <div class="title">Cliffhanger Control</div>
+        <p class="tagline">Operator console for the presentation view.</p>
+
+        <div class="controls">
+          <label for="stepsInput">Steps to add</label>
+          <div class="input-row">
+            <input
+              id="stepsInput"
+              type="number"
+              min="0"
+              step="1"
+              placeholder="Add steps (0+)"
+              inputmode="numeric"
+            />
+            <button id="playBtn" type="button">Play</button>
+          </div>
+          <div class="button-row">
+            <button id="resetBtn" type="button">Reset</button>
+            <button id="openBtn" type="button">Open Presentation</button>
+          </div>
+        </div>
+
+        <div class="status-line">
+          <span class="status-label">Status</span>
+          <span id="statusText">Ready</span>
+        </div>
+        <div id="errorText" class="error" role="alert" aria-live="polite" hidden></div>
+      </section>
+    </main>
+
+    <script src="controller.js"></script>
+  </body>
+</html>

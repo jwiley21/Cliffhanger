@@ -22,6 +22,9 @@ body {
   min-height: 100vh;
   color: var(--text);
   font-family: "Gill Sans", "Trebuchet MS", "Verdana", sans-serif;
+}
+
+body.controller {
   background: radial-gradient(1200px 700px at 15% 15%, #214046, var(--bg-deep) 65%);
   display: flex;
   align-items: center;
@@ -30,7 +33,7 @@ body {
   overflow-x: hidden;
 }
 
-body::before {
+body.controller::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -42,6 +45,24 @@ body::before {
   );
   mix-blend-mode: soft-light;
   opacity: 0.7;
+}
+
+body.presentation {
+  background: #050708;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.controller-layout {
+  width: min(420px, 92vw);
+  position: relative;
+  z-index: 1;
+}
+
+.controller-panel {
+  width: 100%;
 }
 
 .game {
@@ -157,11 +178,30 @@ button:disabled {
   transform: none;
 }
 
-#lockBtn {
+#lockBtn,
+#playBtn {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: #201104;
   font-weight: 700;
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.fullscreen-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 5;
+  padding: 8px 12px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  background: rgba(10, 16, 18, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.4);
+}
+
+.fullscreen-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 20px rgba(0, 0, 0, 0.45);
 }
 
 .status-line {
@@ -206,11 +246,26 @@ button:disabled {
   overflow: hidden;
 }
 
+.presentation #stageWrapper {
+  width: 100vw;
+  height: 100vh;
+  padding: 24px;
+  border-radius: 0;
+  background: #050708;
+  border: none;
+  box-shadow: none;
+  min-height: 0;
+}
+
 #stageWrapper:fullscreen {
   width: 100vw;
   height: 100vh;
   padding: 26px;
   background: #050708;
+}
+
+#stageWrapper:fullscreen .fullscreen-btn {
+  display: none;
 }
 
 #stage {
@@ -301,7 +356,7 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 
-  #stageWrapper {
+  .game #stageWrapper {
     height: min(60vh, 540px);
   }
 }
