@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cliffhanger Climb</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="game">
+      <section class="hud" aria-label="Game controls">
+        <div class="title">Cliffhanger Climb</div>
+        <p class="tagline">Lock in your steps and test your nerve.</p>
+
+        <div class="controls">
+          <label for="stepsInput">Steps to add</label>
+          <div class="input-row">
+            <input
+              id="stepsInput"
+              type="number"
+              min="0"
+              step="1"
+              placeholder="Add steps (0+)"
+              inputmode="numeric"
+            />
+            <button id="lockBtn" type="button">Enter</button>
+          </div>
+          <div class="button-row">
+            <button id="resetBtn" type="button">Reset</button>
+            <button id="fullscreenBtn" type="button">Fullscreen</button>
+          </div>
+        </div>
+
+        <div class="status-line">
+          <span class="status-label">Status</span>
+          <span id="statusText">Ready</span>
+        </div>
+        <div id="errorText" class="error" role="alert" aria-live="polite" hidden></div>
+
+        <div class="note">Add steps to climb. Go past 25 and you fall.</div>
+      </section>
+
+      <section id="stageWrapper" aria-label="Cliff stage">
+        <div id="stage">
+          <div id="climber">
+            <img
+              id="climberSprite"
+              src="assets/climber.png"
+              alt="Climber"
+              draggable="false"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
