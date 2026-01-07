@@ -9,6 +9,7 @@ const EDGE_HOLD_MS = 500;
 const FALL_DURATION_MS = 2000;
 const BASE_STAGE_WIDTH = 900;
 const BASE_STAGE_HEIGHT = 550;
+const BACKGROUND_SHIFT_Y = 40; // Base pixels to reveal the full title.
 
 // Tape endpoints sampled from the background image (normalized to bg.png size).
 const PATH_START = { x: 0.1925, y: 0.6401 };
@@ -72,6 +73,7 @@ const state = {
     width: 1152,
     height: 896,
   },
+  bgShiftY: 0,
   hudHome: {
     parent: hud.parentElement,
     nextSibling: hud.nextElementSibling,
@@ -237,6 +239,7 @@ function getBackgroundMetrics() {
   const bgHeight = imgHeight * scale;
   const offsetX = (bgWidth - stageWidth) / 2;
   const offsetY = (bgHeight - stageHeight) / 2;
+  const shiftY = state.bgShiftY;
 
   return {
     imgWidth,
@@ -244,6 +247,7 @@ function getBackgroundMetrics() {
     scale,
     offsetX,
     offsetY,
+    shiftY,
   };
 }
 
@@ -254,10 +258,10 @@ function getPathPoint(step) {
   const normX = PATH_START.x + (PATH_END.x - PATH_START.x) * pathT;
   const normY = PATH_START.y + (PATH_END.y - PATH_START.y) * pathT;
 
-  const { imgWidth, imgHeight, scale, offsetX, offsetY } =
+  const { imgWidth, imgHeight, scale, offsetX, offsetY, shiftY } =
     getBackgroundMetrics();
   const rawX = normX * imgWidth * scale - offsetX;
-  const rawY = normY * imgHeight * scale - offsetY;
+  const rawY = normY * imgHeight * scale - offsetY + shiftY;
 
   const scaleFactor = stage.clientHeight / BASE_STAGE_HEIGHT;
   const tangentOffset = FOOT_OFFSET.tangent * scaleFactor;
@@ -312,6 +316,8 @@ function resizeStage() {
   const stageHeight = Math.round(BASE_STAGE_HEIGHT * scale);
   stage.style.width = `${stageWidth}px`;
   stage.style.height = `${stageHeight}px`;
+  state.bgShiftY = (BACKGROUND_SHIFT_Y * stageHeight) / BASE_STAGE_HEIGHT;
+  stage.style.setProperty("--bg-shift-y", `${state.bgShiftY}px`);
 
   setClimberStep(state.currentStep, false);
 }

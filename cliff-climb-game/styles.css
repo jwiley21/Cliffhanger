@@ -220,6 +220,7 @@ button:disabled {
   border-radius: 18px;
   overflow: hidden;
   background: url("assets/bg.png") center/cover no-repeat;
+  background-position: center calc(50% + var(--bg-shift-y, 0px));
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
 }
